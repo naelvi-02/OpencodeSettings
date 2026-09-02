@@ -19,7 +19,7 @@ if (!fs.existsSync(BACKUP_DIR)) {
 function backupFile(filePath) {
   if (fs.existsSync(filePath)) {
     const fileName = path.basename(filePath);
-    const timestamp = new Date().isoString().replace(/[:.]/g, '-');
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
     try {
       fs.copyFileSync(filePath, path.join(BACKUP_DIR, `${fileName}.${timestamp}.bak`));
     } catch (err) {

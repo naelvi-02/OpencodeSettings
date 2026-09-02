@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OpenCode Model &amp; Router Manager</title>
+  <title>OpenCode Model & Router Manager</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -15,10 +15,6 @@
               900: '#0f172a',
               800: '#1e293b',
               700: '#334155'
-            },
-            brand: {
-              500: '#6366f1',
-              600: '#4f46e5'
             }
           }
         }
@@ -35,9 +31,7 @@
   </style>
 </head>
 <body class="bg-dark-900 text-slate-100 min-h-screen flex flex-col antialiased">
-
-  <!-- NAVBAR -->
-  <header class="sticky top-0 z-40 bg-dark-900/80 backdrop-blur-md border-b border-slate-800">
+  <header class="sticky top-0 z-40 bg-dark-900/90 backdrop-blur-md border-b border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3">
         <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
@@ -45,25 +39,34 @@
         </div>
         <div>
           <h1 class="font-bold text-lg tracking-tight bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">OpenCode Manager</h1>
-          <p class="text-xs text-slate-400">Model &amp; Router Switcher</p>
+          <p class="text-xs text-slate-400">Model & Router Switcher</p>
         </div>
       </div>
-
-      <!-- Tab Buttons -->
       <nav class="flex items-center space-x-1 bg-dark-800 p-1 rounded-lg border border-slate-700/50">
-        <button onclick="setTab('quick')" id="tab-btn-quick" class="tab-btn px-3 py-1.5 rounded-md text-sm font-medium transition">�a️ Quick Switch</button>
-        <button onclick="setTab('agents')" id="tab-btn-agents" class="tab-btn px-3 py-1.5 rounded-md text-sm font-medium transition">🤖 Agent Matrix</button>
-        <button onclick="setTab('providers')" id="tab-btn-providers" class="tab-btn px-3 py-1.5 rounded-md text-sm font-medium transition">🌐 Routers &amp; Models</button>
-        <button onclick="setTab('raw')" id="tab-btn-raw" class="tab-btn px-3 py-1.5 rounded-md text-sm font-medium transition">📄 Raw &amp; Backups</button>
+        <button onclick="setTab('quick')" id="tab-btn-quick" class="tab-btn px-3 py-1.5 rounded-md text-sm font-medium transition flex items-center space-x-1.5">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          <span>Quick Switch</span>
+        </button>
+        <button onclick="setTab('agents')" id="tab-btn-agents" class="tab-btn px-3 py-1.5 rounded-md text-sm font-medium transition flex items-center space-x-1.5">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+          <span>Agent Matrix</span>
+        </button>
+        <button onclick="setTab('providers')" id="tab-btn-providers" class="tab-btn px-3 py-1.5 rounded-md text-sm font-medium transition flex items-center space-x-1.5">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0 3-4.03 3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+          <span>Routers & Models</span>
+        </button>
+        <button onclick="setTab('raw')" id="tab-btn-raw" class="tab-btn px-3 py-1.5 rounded-md text-sm font-medium transition flex items-center space-x-1.5">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <span>Raw & Backups</span>
+        </button>
       </nav>
 
-      <!-- Action Buttons -->
       <div class="flex items-center space-x-2">
-        <button onclick="loadConfig()" class="px-3 py-2 rounded-lg bg-dark-800 hover:bg-slate-700 text-slate-300 text-sm font-medium border border-slate-700 flex items-center space-x-1.5 transition" title="Reload">
+        <button onclick="loadConfig()" class="px-3 py-2 rounded-lg bg-dark-800 hover:bg-slate-700 text-slate-300 text-sm font-medium border border-slate-700 flex items-center space-x-1.5">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
           <span class="hidden sm:inline">Reload</span>
         </button>
-        <button onclick="saveAll()" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-lg shadow-indigo-500/25 flex items-center space-x-1.5 transition">
+        <button onclick="saveAll()" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-lg shadow-indigo-500/25 flex items-center space-x-1.5">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v12a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-14 0V4a2 2 0 012-2h4a2 2 0 012 2v3m2 4h10"/></svg>
           <span>Simpan</span>
         </button>
@@ -72,7 +75,6 @@
   </header>
 
 <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1">
-  <!-- QUICK SWITCHER TAB -->
   <div id="tab-quick" class="space-y-6">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
       <div class="p-5 rounded-xl bg-dark-800 border border-slate-700/60">
@@ -88,12 +90,11 @@
         <p id="status-providers" class="mt-2 text-lg font-bold text-sky-400 mono truncate">-</p>
       </div>
     </div>
-
     <div class="p-6 rounded-2xl bg-gradient-to-r from-indigo-950/60 to-purple-950/60 border border-indigo-500/30">
       <div class="flex items-center justify-between flex-wrap gap-4">
         <div>
-          <h2 class="text-xl font-bold text-white flex items-center space-x-2"><span>🔀</span><span>One-Click Mass Router Switcher</span></h2>
-          <p class="text-sm text-slate-300 mt-1">Alihkan SEMUA model agent &amp; main model ke router tujuan sekaligus.</p>
+          <h2 class="text-xl font-bold text-white flex items-center space-x-2"><span>One-Click Mass Router Switcher</span></h2>
+          <p class="text-sm text-slate-300 mt-1">Alihkan SEMUA model agent & main model ke router tujuan sekaligus.</p>
         </div>
         <div class="flex items-center space-x-3">
           <select id="select-mass-router" class="bg-dark-900 border border-indigo-500/50 text-white rounded-lg px-4 py-2.5 text-sm font-semibold"></select>
@@ -135,11 +136,10 @@
     </div>
   </div>
 
-  <!-- AGENT MATRIX TAB -->
   <div id="tab-agents" class="hidden space-y-6">
     <div class="flex items-center justify-between">
       <div>
-        <h2 class="text-xl font-bold text-white">🤖 Oh-My-OpenCode Agent Matrix</h2>
+        <h2 class="text-xl font-bold text-white">Oh-My-OpenCode Agent Matrix</h2>
         <p class="text-sm text-slate-400 mt-1">Atur model dan variant (high/medium/low) untuk setiap subagent.</p>
       </div>
       <div class="flex items-center space-x-2">
@@ -147,28 +147,20 @@
         <select id="select-agent-preset" onchange="renderAgentCards()" class="bg-dark-800 border border-slate-700 text-white rounded-lg px-3 py-1.5 text-sm font-semibold"></select>
       </div>
     </div>
-
-    <div id="agent-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-      <!-- Dynamically populated by JS -->
-    </div>
+    <div id="agent-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"></div>
   </div>
 
-  <!-- PROVIDERS TAB -->
   <div id="tab-providers" class="hidden space-y-6">
     <div class="flex items-center justify-between">
       <div>
-        <h2 class="text-xl font-bold text-white">🌐 Router &amp; Provider Config</h2>
+        <h2 class="text-xl font-bold text-white">Router & Provider Config</h2>
         <p class="text-sm text-slate-400 mt-1">Kelola Base URL, API Key, dan daftar model untuk setiap router.</p>
       </div>
       <button onclick="addNewProvider()" class="px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-white text-sm font-semibold">+ Tambah Router Baru</button>
     </div>
-
-    <div id="provider-container" class="space-y-6">
-      <!-- Dynamically populated -->
-    </div>
+    <div id="provider-container" class="space-y-6"></div>
   </div>
 
-  <!-- RAW JSON & BACKUPS TAB -->
   <div id="tab-raw" class="hidden space-y-6">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <div class="lg:col-span-2 space-y-6">
@@ -181,10 +173,8 @@
           <textarea id="raw-ohmy" rows="12" class="w-full mt-3 p-3.5 bg-dark-900 border border-slate-700 rounded-lg text-xs mono text-slate-200 custom-scroll"></textarea>
         </div>
       </div>
-
-      <!-- Backups List -->
       <div class="p-6 rounded-2xl bg-dark-800 border border-slate-700/60 h-fit">
-        <h3 class="text-lg font-bold text-white">🗄 Auto Backups</h3>
+        <h3 class="text-lg font-bold text-white">Auto Backups</h3>
         <p class="text-xs text-slate-400 mt-1">Setiap save otomatis dibuatkan snapshot.</p>
         <div id="backup-list" class="mt-4 space-y-2 max-h-96 overflow-y-auto custom-scroll"></div>
       </div>
@@ -192,9 +182,8 @@
   </div>
 </main>
 
-<!-- Toast Notification -->
 <div id="toast" class="fixed bottom-6 right-6 px-5 py-3.5 rounded-xl bg-dark-800 border border-indigo-500 text-white shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-3 z-50">
-  <span id="toast-icon">✅</span>
+  <span id="toast-icon"></span>
   <span id="toast-msg" class="text-sm font-medium">Pesan</span>
 </div>
 
@@ -205,7 +194,9 @@ let currentTab = 'quick';
 function showToast(msg, isError = false) {
   const t = document.getElementById('toast');
   document.getElementById('toast-msg').textContent = msg;
-  document.getElementById('toast-icon').textContent = isError ? '❌' : '✅';
+  document.getElementById('toast-icon').innerHTML = isError 
+    ? '<svg class="w-5 h-5 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>' 
+    : '<svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>';
   t.classList.remove('translate-y-20', 'opacity-0');
   t.classList.add('translate-y-0', 'opacity-100');
   setTimeout(() => {
@@ -234,7 +225,6 @@ async function loadConfig() {
     const res = await fetch('/api/config');
     globalConfig = await res.json();
     updateUI();
-    showToast('Konfigurasi terbaru berhasil dimuat');
   } catch (err) {
     showToast('Gagal memuat konfig: ' + err.message, true);
   }
@@ -242,18 +232,15 @@ async function loadConfig() {
 
 function updateUI() {
   if (!globalConfig) return;
-  const { opencode, ohMy, providers, models, backups } = globalConfig;
+  const { opencode, ohMy, providers, models } = globalConfig;
 
-  // Summary status
   document.getElementById('status-main-model').textContent = opencode.model || '(Not set)';
   document.getElementById('status-active-preset').textContent = ohMy.preset || '(Not set)';
   document.getElementById('status-providers').textContent = providers.join(', ') || '(None)';
 
-  // Mass Router Select
   const massSel = document.getElementById('select-mass-router');
   massSel.innerHTML = providers.map(p => `<option value="${p}">${p}</option>`).join('');
 
-  // Core Models
   const modelOpts = models.map(m => `<option value="${m.id}">${m.id}</option>`).join('');
   const coreModelSel = document.getElementById('select-core-model');
   coreModelSel.innerHTML = modelOpts;
@@ -265,7 +252,6 @@ function updateUI() {
     coreExplorerSel.value = opencode.agent.explorer.model || '';
   }
 
-  // Presets Dropdown
   const presetKeys = Object.keys(ohMy.presets || {});
   const presetOpts = presetKeys.map(p => `<option value="${p}">${p}</option>`).join('');
   const actPresetSel = document.getElementById('select-active-preset');
@@ -287,10 +273,8 @@ function renderAgentCards() {
   const { ohMy, models } = globalConfig;
   const selPreset = document.getElementById('select-agent-preset').value;
   const agentObj = (ohMy.presets && ohMy.presets[selPreset]) || ohMy.agents || {};
-
   const grid = document.getElementById('agent-grid');
   grid.innerHTML = '';
-
   const agentNames = ['orchestrator', 'oracle', 'council', 'librarian', 'explorer', 'designer', 'fixer', 'observer'];
   const allAgentKeys = Array.from(new Set([...agentNames, ...Object.keys(agentObj)]));
 
@@ -298,7 +282,6 @@ function renderAgentCards() {
     const agentInfo = agentObj[aKey] || { model: '', variant: 'high' };
     const curModel = agentInfo.model || '';
     const curVariant = agentInfo.variant || 'high';
-
     const card = document.createElement('div');
     card.className = 'p-5 rounded-2xl bg-dark-800 border border-slate-700/60 flex flex-col justify-between space-y-4';
     card.innerHTML = `
@@ -321,7 +304,7 @@ function renderAgentCards() {
           <select onchange="updateAgentVariant('${aKey}', this.value)" class="w-full bg-dark-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white">
             <option value="high" ${curVariant === 'high' ? 'selected' : ''}>High (Deep Reasoning)</option>
             <option value="medium" ${curVariant === 'medium' ? 'selected' : ''}>Medium (Balanced)</option>
-            <option value="low" ${curVariant === 'low' ? 'selected' : ''}>Low (Fast &amp; Light)</option>
+            <option value="low" ${curVariant === 'low' ? 'selected' : ''}>Low (Fast & Light)</option>
           </select>
         </div>
       </div>
@@ -391,7 +374,9 @@ function renderProviders() {
           ${Object.keys(models).map(mK => `
             <div class="p-2.5 rounded-lg bg-dark-900 border border-slate-700/50 flex items-center justify-between">
               <span class="text-xs font-mono text-slate-200 truncate" title="${mK}">${mK}</span>
-              <button onclick="deleteModel('${pKey}', '${mK}')" class="text-slate-500 hover:text-rose-400 text-xs ml-2" title="Hapus">✕</button>
+              <button onclick="deleteModel('${pKey}', '${mK}')" class="text-slate-500 hover:text-rose-400 p-1 rounded" title="Hapus">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
             </div>
           `).join('')}
         </div>
@@ -560,7 +545,7 @@ async function restoreBackup(fileName) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentBoaded', () => {
   loadConfig();
   setTab('quick');
 });
