@@ -31,7 +31,7 @@ function backupFile(filePath) {
 function readJson(filePath, fallback = {}) {
   try {
     if (fs.existsSync(filePath)) {
-      return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      let raw = fs.readFileSync(filePath, 'utf8').replace(/,\s*([}\]])/g, '$1'); return JSON.parse(raw);
     }
   } catch (err) {
     console.error('Error reading JSON ' + filePath, err);
